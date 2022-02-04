@@ -81,18 +81,20 @@ public class Group {
 		String divider = "-----\n";
 		String groupInfo = divider + "Group #" + number + ".\n" + divider;
 		if (teacher != null) {
-			groupInfo += teacher.getShortTeacherInfo() + "\n" + divider;
+			groupInfo += teacher.getBriefPersonInfo() + "\n" + divider;
 		} else {
 			groupInfo += "Teacher is currently unassigned.\n" + divider;
 		}
 		if (numberOfStudents < 1) {
 			groupInfo += "Currently there are no students in the group.\n" + divider;
 		} else {
+			groupInfo += "Current students in the group are:\n" + divider;
 			for (int i = 0; i < numberOfStudents; i++) {
-				groupInfo += students[i].getShortStudentInfo() + "\n" + divider;
+				groupInfo += students[i].getBriefPersonInfo() + "\n" + divider;
 			}
 		}
 		groupInfo += "Number of students: " + numberOfStudents + ".\n" + divider;
+		groupInfo += "Currently there are " + (students.length - numberOfStudents) + " places left in the group.\n" + divider;
 		return groupInfo;
 	}
 }
