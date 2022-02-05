@@ -12,6 +12,10 @@ public class Employee extends Person {
 		super(firstName, patronymicName, lastName);
 	}
 	
+	public Employee(Person person) {
+		super(person.getFirstName(), person.getLastName());
+	}
+	
 	public Money getSalary() {
 		return salary;
 	}

@@ -9,56 +9,56 @@ public class App {
 
 	public static void main(String[] args) {
 		
-		Cleaner cl1 = new Cleaner("Steven", "Rigley");
-		Teacher th1 = new Teacher("George", "Washington");
-		th1.setPhD(true);
-		Teacher th2 = new Teacher("William", "Henry", "Harrison");
-		th2.setPhD(false);
-		Teacher th3 = new Teacher("Abe", "Lincoln");
-		Teacher th4 = new Teacher("Dwight", "Eisenhower");
-		th4.setPhD(true);
-		Teacher th5 = new Teacher("Richard", "Nixon");
+		Cleaner cleaner1 = new Cleaner("Steven", "Rigley");
+		Teacher teacher1 = new Teacher("George", "Washington");
+		teacher1.setPhD(true);
+		Teacher teacher2 = new Teacher("William", "Henry", "Harrison");
+		Teacher teacher3 = new Teacher("Abe", "Lincoln");
+		Teacher teacher4 = new Teacher("Dwight", "Eisenhower");
+		teacher4.setPhD(true);
+		Teacher teacher5 = new Teacher("Richard", "Nixon");
 		
-		cl1.setSalary(new Money(Currency.USD, BigDecimal.valueOf(1000)));
-		th1.setSalary(new Money(Currency.USD, BigDecimal.valueOf(3000)));
-		th2.setSalary(new Money(Currency.USD, BigDecimal.valueOf(3000)));
-		th3.setSalary(new Money(Currency.USD, BigDecimal.valueOf(2000)));
-		th4.setSalary(new Money(Currency.USD, BigDecimal.valueOf(2000)));
-		th5.setSalary(new Money(Currency.USD, BigDecimal.valueOf(2000)));
+		cleaner1.setSalary(new Money(Currency.USD, BigDecimal.valueOf(1000)));
+		teacher1.setSalary(new Money(Currency.USD, BigDecimal.valueOf(3000)));
+		teacher2.setSalary(new Money(Currency.USD, BigDecimal.valueOf(3000)));
+		teacher3.setSalary(new Money(Currency.USD, BigDecimal.valueOf(2000)));
+		teacher4.setSalary(new Money(Currency.USD, BigDecimal.valueOf(2000)));
+		teacher5.setSalary(new Money(Currency.USD, BigDecimal.valueOf(2000)));
 		
+		cleaner1.setYearsOfExperience(10);
 		
-		cl1.setYearsOfExperience(10);
+		teacher1.setYearsOfExperience(10);
+		teacher2.setYearsOfExperience(10);
 		
-		th1.setYearsOfExperience(10);
-		th2.setYearsOfExperience(10);
-		
-		System.out.println("Current salary of " + th1.toString() + " is:");
-		System.out.println(AccountantUtil.countTotalSalary(th1));
+		System.out.println("Current salary of " + teacher1.toString() + " is:");
+		System.out.println(AccountantUtil.countTotalSalary(teacher1));
 		System.out.println();
-		System.out.println("Current salary of " + th2.toString() + " is:");
-		System.out.println(AccountantUtil.countTotalSalary(th2));
+		System.out.println("Current salary of " + teacher2.toString() + " is:");
+		System.out.println(AccountantUtil.countTotalSalary(teacher2));
 		System.out.println();
 		
-		Department dp1 = new Department(DepName.HISTORY_AND_LITERATURE);
-		dp1.setDepHead(th1);
-		dp1.setDepAssistHead(th2);
+		Collective.setCollectiveSize(10);
+		Department department1 = new Department(DepName.HISTORY_AND_LITERATURE);
+		department1.setDepHead(teacher1);
+		department1.setDepAssistHead(teacher2);
 		
-		dp1.addTeacher(th3);
-		dp1.addTeacher(th4);
-		dp1.addTeacher(th5);
-		dp1.setCleaner(cl1);		
+		department1.setCleaner(cleaner1);	
 		
-		System.out.println(dp1.getDepInfo());
-		System.out.println("Current department of " + dp1.getDepName() + " total salaries are: ");
-		System.out.println(AccountantUtil.countDepTotalSalaries(dp1));
+		department1.addPerson(teacher3);
+		department1.addPerson(teacher4);
+		department1.addPerson(teacher5);
+		
+		System.out.println(department1.getDepInfo());
+		System.out.println("Current department of " + department1.getDepName() + " total salaries are: ");
+		System.out.println(AccountantUtil.countDepTotalSalaries(department1));
 		System.out.println();
 		
-		dp1.removeTeacher(th4);
-		dp1.setDepAssistHead(null);
+		department1.removePerson(teacher4);
+		department1.setDepAssistHead(null);
 		
-		System.out.println(dp1.getDepInfo());
-		System.out.println("Current department of " + dp1.getDepName() + " total salaries are: ");
-		System.out.println(AccountantUtil.countDepTotalSalaries(dp1));
+		System.out.println(department1.getDepInfo());
+		System.out.println("Current department of " + department1.getDepName() + " total salaries are: ");
+		System.out.println(AccountantUtil.countDepTotalSalaries(department1));
 		
 		Student student1 = new Student("James", "Riley");
 		Student student2 = new Student("Alexander", "Ivanovich", "Prohorov");
@@ -88,24 +88,18 @@ public class App {
 		
 		System.out.println();
 		
+		Collective.setCollectiveSize(8);
 		Group group1 = new Group(527);
-		group1.setTeacher(th3);
+		group1.setTeacher(teacher3);
 		
-		/*Group group2 = new Group(528);
-		group2.setStudyYear(1);
-		Group group3 = new Group(627);
-		group3.setStudyYear(2);
-		Group group4 = new Group(629);
-		group4.setStudyYear(2);*/
-		
-		group1.addStudent(student1);
-		group1.addStudent(student2);
-		group1.addStudent(student3);
-		group1.addStudent(student4);
-		group1.addStudent(student5);
-		group1.addStudent(student6);
-		group1.addStudent(student7);
-		group1.addStudent(student8);
+		group1.addPerson(student1);
+		group1.addPerson(student2);
+		group1.addPerson(student3);
+		group1.addPerson(student4);
+		group1.addPerson(student5);
+		group1.addPerson(student6);
+		group1.addPerson(student7);
+		group1.addPerson(student8);
 		
 		System.out.println("Initial group:");		
 		System.out.println(group1.getGroupInfo());
@@ -114,7 +108,7 @@ public class App {
 		System.out.println();
 		System.out.println();
 		
-		group1.removeStudent(student3);
+		group1.removePerson(student3);
 		
 		System.out.println("Corrected group:");		
 		System.out.println(group1.getGroupInfo());
@@ -123,11 +117,12 @@ public class App {
 		System.out.println();
 		System.out.println();
 		
-		group1.addStudent(student9);		
+		group1.addPerson(student9);		
 		System.out.println("Newly corrected group:");
 		System.out.println(group1.getGroupInfo());
 		System.out.print("Newly corrected group GPA: ");
 		System.out.printf("%.2f", Util.getGradePointAverageGroup(group1));
+		System.out.println();
 		System.out.println();
 		
 		/*Faculty faculty1 = new Faculty("Naval engineering");

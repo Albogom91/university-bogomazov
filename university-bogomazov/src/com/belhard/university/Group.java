@@ -1,13 +1,13 @@
 package com.belhard.university;
 
-public class Group {
+public class Group extends Collective {
 	private int number;
-	private final Student[] students = new Student[8];
 	private Teacher teacher;
 	private int numberOfStudents;
 	private int studyYear;
 
 	public Group(int number) {
+		super();
 		this.number = number;
 	}
 
@@ -17,10 +17,6 @@ public class Group {
 
 	public void setNumber(int number) {
 		this.number = number;
-	}
-	
-	public Student[] getStudents() {
-		return students;
 	}
 
 	public Teacher getTeacher() {
@@ -44,41 +40,10 @@ public class Group {
 			this.studyYear = studyYear;
 		}
 	}
-
-	public boolean addStudent(Student student) {
-		boolean isAdded = false;
-		if (numberOfStudents < students.length) {
-			students[numberOfStudents++] = student;
-			isAdded = true;
-		}
-		return isAdded;
-	}
-
-	public boolean removeStudent(Student student) {
-		boolean isRemoved = false;
-		for (int i = 0; i < numberOfStudents; i++) {
-			if (this.students[i].getId() == student.getId()) {
-				isRemoved = true;
-				if (i == numberOfStudents - 1) {
-					this.students[i] = null;
-				} else {
-					while (i < numberOfStudents - 1) {
-						this.students[i] = this.students[i + 1];
-						i++;
-					}
-					students[numberOfStudents - 1] = null;
-					break;
-				}
-			}
-		}
-		if (isRemoved) {
-			numberOfStudents--;
-		}
-		return isRemoved;
-	}
-
+	
 	public String getGroupInfo() {
 		String divider = "-----\n";
+		this.numberOfStudents = this.getNumberOfPersons();
 		String groupInfo = divider + "Group #" + number + ".\n" + divider;
 		if (teacher != null) {
 			groupInfo += teacher.getBriefPersonInfo() + "\n" + divider;
@@ -89,12 +54,10 @@ public class Group {
 			groupInfo += "Currently there are no students in the group.\n" + divider;
 		} else {
 			groupInfo += "Current students in the group are:\n" + divider;
-			for (int i = 0; i < numberOfStudents; i++) {
-				groupInfo += students[i].getBriefPersonInfo() + "\n" + divider;
-			}
+			groupInfo += this.getCollectiveInfo();
 		}
 		groupInfo += "Number of students: " + numberOfStudents + ".\n" + divider;
-		groupInfo += "Currently there are " + (students.length - numberOfStudents) + " places left in the group.\n" + divider;
+		groupInfo += "Currently there are " + (this.getPersons().length - numberOfStudents) + " places left in the group.\n" + divider;
 		return groupInfo;
 	}
 }

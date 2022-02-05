@@ -2,17 +2,17 @@ package com.belhard.university;
 
 public class Util {
 
-	public static double getGradePointAverageGroup(Group group) {
+	public static double getGradePointAverageGroup(Collective c) {
 		double sum = 0;
-		Student[] temp = group.getStudents();
-		for (int i = 0; i < group.getNumberOfStudents(); i++) {
-			sum += temp[i].getAcademicRecord();
+		for (int i = 0; i < c.getNumberOfPersons(); i++) {
+			Student s = (Student) c.getPersons()[i];
+			sum += s.getAcademicRecord();
 		}
-		double gradePointAverage = sum / group.getNumberOfStudents();
+		double gradePointAverage = sum / c.getNumberOfPersons();
 		return gradePointAverage;
 	}
 
-	public static double getGradePointAverageFaculty(Faculty faculty) {
+	/*public static double getGradePointAverageFaculty(Faculty faculty) {
 		double sum = 0;
 		int numberOfStudents = 0;
 		Group[] temp = faculty.getGroups();
@@ -36,5 +36,5 @@ public class Util {
 		}
 		double gradePointAverageStudyYear = sum / numberOfStudents;
 		return gradePointAverageStudyYear;
-	}
+	}*/
 }
