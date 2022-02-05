@@ -3,6 +3,7 @@ package com.belhard.university;
 import java.math.BigDecimal;
 
 import com.belhard.university.Department.DepName;
+import com.belhard.university.Faculty.FacultyName;
 import com.belhard.university.Money.Currency;
 
 public class App {
@@ -17,6 +18,7 @@ public class App {
 		Teacher teacher4 = new Teacher("Dwight", "Eisenhower");
 		teacher4.setPhD(true);
 		Teacher teacher5 = new Teacher("Richard", "Nixon");
+		Teacher teacher6 = new Teacher("Theodore", "Roosevelt");
 		
 		cleaner1.setSalary(new Money(Currency.USD, BigDecimal.valueOf(1000)));
 		teacher1.setSalary(new Money(Currency.USD, BigDecimal.valueOf(3000)));
@@ -24,6 +26,7 @@ public class App {
 		teacher3.setSalary(new Money(Currency.USD, BigDecimal.valueOf(2000)));
 		teacher4.setSalary(new Money(Currency.USD, BigDecimal.valueOf(2000)));
 		teacher5.setSalary(new Money(Currency.USD, BigDecimal.valueOf(2000)));
+		teacher6.setSalary(new Money(Currency.USD, BigDecimal.valueOf(2000)));
 		
 		cleaner1.setYearsOfExperience(10);
 		
@@ -44,16 +47,17 @@ public class App {
 		
 		department1.setCleaner(cleaner1);	
 		
-		department1.addPerson(teacher3);
-		department1.addPerson(teacher4);
-		department1.addPerson(teacher5);
+		department1.addTeacher(teacher3);
+		department1.addTeacher(teacher4);
+		department1.addTeacher(teacher5);
 		
 		System.out.println(department1.getDepInfo());
 		System.out.println("Current department of " + department1.getDepName() + " total salaries are: ");
 		System.out.println(AccountantUtil.countDepTotalSalaries(department1));
 		System.out.println();
 		
-		department1.removePerson(teacher4);
+		department1.removeTeacher(teacher4);
+		department1.addTeacher(teacher6);
 		department1.setDepAssistHead(null);
 		
 		System.out.println(department1.getDepInfo());
@@ -92,14 +96,14 @@ public class App {
 		Group group1 = new Group(527);
 		group1.setTeacher(teacher3);
 		
-		group1.addPerson(student1);
-		group1.addPerson(student2);
-		group1.addPerson(student3);
-		group1.addPerson(student4);
-		group1.addPerson(student5);
-		group1.addPerson(student6);
-		group1.addPerson(student7);
-		group1.addPerson(student8);
+		group1.addStudent(student1);
+		group1.addStudent(student2);
+		group1.addStudent(student3);
+		group1.addStudent(student4);
+		group1.addStudent(student5);
+		group1.addStudent(student6);
+		group1.addStudent(student7);
+		group1.addStudent(student8);
 		
 		System.out.println("Initial group:");		
 		System.out.println(group1.getGroupInfo());
@@ -108,7 +112,8 @@ public class App {
 		System.out.println();
 		System.out.println();
 		
-		group1.removePerson(student3);
+		group1.removeStudent(student3);
+		group1.removeStudent(student7);
 		
 		System.out.println("Corrected group:");		
 		System.out.println(group1.getGroupInfo());
@@ -117,7 +122,8 @@ public class App {
 		System.out.println();
 		System.out.println();
 		
-		group1.addPerson(student9);		
+		group1.addStudent(student9);		
+		group1.addStudent(student10);		
 		System.out.println("Newly corrected group:");
 		System.out.println(group1.getGroupInfo());
 		System.out.print("Newly corrected group GPA: ");
@@ -125,19 +131,16 @@ public class App {
 		System.out.println();
 		System.out.println();
 		
-		/*Faculty faculty1 = new Faculty("Naval engineering");
+		Collective.setCollectiveSize(10);
+		Department department2 = new Department(DepName.CHEMESTRY);
+		Department department3 = new Department(DepName.MATH_AND_PHYSICS);
+		Collective.setCollectiveSize(20);
+		Faculty faculty1 = new Faculty(FacultyName.FACULTY_OF_NATURAL_SCIENCES);
 		
-		faculty1.addGroup(group2);
-		faculty1.addGroup(group3);
-		faculty1.addGroup(group4);
+		faculty1.addDepartment(department2);
+		faculty1.addDepartment(department3);
 		
-		System.out.print("GPA of naval engineers:");
-		System.out.printf("%.2f", Util.getGradePointAverageFaculty(faculty1));
-		System.out.println();
-		
-		System.out.print("GPA of naval engineers(second year of study):");
-		System.out.printf("%.2f", Util.getGradePointAverageStudyYear(faculty1, 2));
-		System.out.println();*/
+		System.out.println(faculty1.getFacultyInfo());
 		
 	}
 

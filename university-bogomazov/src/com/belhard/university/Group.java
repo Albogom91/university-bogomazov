@@ -41,9 +41,19 @@ public class Group extends Collective {
 		}
 	}
 	
+	public boolean addStudent(Student student) {
+		boolean isAdded = this.addInstance(student);
+		return isAdded;
+	}
+	
+	public boolean removeStudent(Student student) {
+		boolean isRemoved = this.removeInstance(student);
+		return isRemoved;
+	}
+	
 	public String getGroupInfo() {
 		String divider = "-----\n";
-		this.numberOfStudents = this.getNumberOfPersons();
+		this.numberOfStudents = this.getNumberOfInstances();
 		String groupInfo = divider + "Group #" + number + ".\n" + divider;
 		if (teacher != null) {
 			groupInfo += teacher.getBriefPersonInfo() + "\n" + divider;
@@ -57,7 +67,7 @@ public class Group extends Collective {
 			groupInfo += this.getCollectiveInfo();
 		}
 		groupInfo += "Number of students: " + numberOfStudents + ".\n" + divider;
-		groupInfo += "Currently there are " + (this.getPersons().length - numberOfStudents) + " places left in the group.\n" + divider;
+		groupInfo += "Currently there are " + (this.getInstances().length - numberOfStudents) + " places left in the group.\n" + divider;
 		return groupInfo;
 	}
 }

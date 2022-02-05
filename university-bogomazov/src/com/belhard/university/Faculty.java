@@ -1,10 +1,9 @@
 package com.belhard.university;
 
-public class Faculty {
+public class Faculty extends Collective {
 	private FacultyName name;
 	private int numberOfDepartments;
 	private int numberOfGroups;
-	private final Department[] departments = new Department[10];
 	
 	public enum FacultyName{
 		FACULTY_OF_HUMANITIES_AND_SOCIAL_SCINENCES,
@@ -31,8 +30,28 @@ public class Faculty {
 		return numberOfGroups;
 	}
 	
-	public Department[] getDepartments() {
-		return departments;
+	public boolean addDepartment(Department department) {
+		boolean isAdded = this.addInstance(department);
+		return isAdded;
+	}
+	
+	public boolean removeDepartment(Department department) {
+		boolean isRemoved = this.removeInstance(department);
+		return isRemoved;
+	}
+	
+	public String getFacultyInfo() {
+		String divider = "-----\n";
+		this.numberOfDepartments = this.getNumberOfInstances();
+		String facultyInfo = divider + getName() + ".\n" + divider;
+		if (numberOfDepartments < 1) {
+			facultyInfo += "Currently there are no departments in the faculty.\n" + divider;
+		} else {
+			facultyInfo += "Current departments in the faculty are:\n" + divider;
+			facultyInfo += this.getCollectiveInfo();
+		}
+		facultyInfo += "Current number of departments is " + this.numberOfDepartments + ".\n" + divider;
+		return facultyInfo;
 	}
 	
 }

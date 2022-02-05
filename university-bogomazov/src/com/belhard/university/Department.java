@@ -53,10 +53,20 @@ public class Department extends Collective {
 	public int getNumberOfTeachers() {
 		return numberOfTeachers;
 	}
+
+	public boolean addTeacher(Teacher teacher) {
+		boolean isAdded = this.addInstance(teacher);
+		return isAdded;
+	}
+	
+	public boolean removeTeacher(Teacher teacher) {
+		boolean isRemoved = this.removeInstance(teacher);
+		return isRemoved;
+	}
 	
 	public String getDepInfo() {
 		String divider = "-----\n";
-		this.numberOfTeachers = this.getNumberOfPersons();
+		this.numberOfTeachers = this.getNumberOfInstances();
 		String depInfo = divider + "Department of " + getDepName() + ".\n" + divider;
 		if (depHead != null) {
 			depInfo += "Department head: " + depHead.getBriefPersonInfo() + "\n" + divider;
@@ -75,7 +85,7 @@ public class Department extends Collective {
 			depInfo += this.getCollectiveInfo();
 		}
 		depInfo += "Number of teachers: " + numberOfTeachers + ".\n" + divider;
-		depInfo += "Currently " + (this.getPersons().length - numberOfTeachers) + " teachers needed to complete department.\n" + divider;
+		depInfo += "Currently " + (this.getInstances().length - numberOfTeachers) + " teachers needed to complete department.\n" + divider;
 		if (cleaner != null) {
 			depInfo += "Cleaner: " + cleaner.getBriefPersonInfo() + "\n" + divider;
 		} else {
