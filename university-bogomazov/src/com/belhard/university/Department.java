@@ -82,9 +82,13 @@ public class Department implements Identifiable {
 
 	public boolean addTeacher(Teacher teacher) {
 		boolean isAdded = false;
+		if (containsTeacher(teacher)) {
+			System.out.println(teacher.toString() + " is already in the department");
+		} else {
 		if (numberOfTeachers < maxNumberOfTeachers) {
 			isAdded = teachers.add(teacher);
 			numberOfTeachers = teachers.getNumberOfInstances();
+			}
 		}
 		return isAdded;
 	}

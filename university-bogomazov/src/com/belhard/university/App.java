@@ -193,6 +193,12 @@ public class App {
 		System.out.println("Faculty1 contains department1: " + faculty1.containsDepartment(department1));
 		System.out.println("Faculty1 contains department3: " + faculty1.containsDepartment(department3));
 		
+		System.out.println();
+		Group group2 = new Group(555);
+		group2.addStudent(student12);
+		group2.addStudent(student12);
+		System.out.println(group2.getGroupInfo());
+		
 	}
 
 }

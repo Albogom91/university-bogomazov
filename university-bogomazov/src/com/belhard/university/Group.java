@@ -2,7 +2,7 @@ package com.belhard.university;
 
 import com.belhard.university.datastructures.DynamicArray;
 
-public class Group implements Identifiable{
+public class Group implements Identifiable {
 	private static int counter = 0;
 	private int id;
 	private int number;
@@ -16,7 +16,7 @@ public class Group implements Identifiable{
 		id = ++counter;
 		this.number = number;
 	}
-	
+
 	@Override
 	public int getId() {
 		return id;
@@ -49,16 +49,20 @@ public class Group implements Identifiable{
 	public DynamicArray getStudents() {
 		return students;
 	}
-	
+
 	public int size() {
 		return students.getNumberOfInstances();
 	}
 
 	public boolean addStudent(Student student) {
 		boolean isAdded = false;
-		if (numberOfStudents < maxNumberOfStudents) {
-			isAdded = students.add(student);
-			numberOfStudents = students.getNumberOfInstances();
+		if (containsStudent(student)) {
+			System.out.println(student.toString() + " is already in the group");
+		} else {
+			if (numberOfStudents < maxNumberOfStudents) {
+				isAdded = students.add(student);
+				numberOfStudents = students.getNumberOfInstances();
+			}
 		}
 		return isAdded;
 	}
@@ -82,11 +86,11 @@ public class Group implements Identifiable{
 		Student student = (Student) students.get(index);
 		return student;
 	}
-	
+
 	public Student[] toArrayStudents() {
 		Object[] temp = students.toArray();
 		Student[] studentsArray = new Student[temp.length];
-		for(int i = 0; i < temp.length; i++) {
+		for (int i = 0; i < temp.length; i++) {
 			studentsArray[i] = (Student) temp[i];
 		}
 		return studentsArray;
@@ -129,9 +133,7 @@ public class Group implements Identifiable{
 			return false;
 		}
 		Group other = (Group) obj;
-		return id == other.id 
-				&& number == other.number 
-				&& numberOfStudents == other.numberOfStudents 
+		return id == other.id && number == other.number && numberOfStudents == other.numberOfStudents
 				&& teacher.equals(other.teacher);
 	}
 

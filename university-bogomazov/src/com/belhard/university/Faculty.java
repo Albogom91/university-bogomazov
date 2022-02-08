@@ -62,14 +62,22 @@ public class Faculty implements Identifiable{
 	}
 	
 	public boolean addDepartment(Department department) {
-		boolean isAdded = departments.add(department);
-		this.numberOfDepartments = departments.getNumberOfInstances();
+		boolean isAdded = false;
+		if (containsDepartment(department)) {
+			System.out.println(department.toString() + " is already in the faculty");
+		} else {
+		if (numberOfDepartments < maxNumberOfDepartments) {
+			isAdded = departments.add(department);;
+			numberOfDepartments = departments.getNumberOfInstances();
+			}
+		}
+		numberOfDepartments = departments.getNumberOfInstances();
 		return isAdded;
 	}
 	
 	public boolean removeDepartment(Department department) {
 		boolean isRemoved = departments.remove(department);
-		this.numberOfDepartments = departments.getNumberOfInstances();
+		numberOfDepartments = departments.getNumberOfInstances();
 		return isRemoved;
 	}
 	
