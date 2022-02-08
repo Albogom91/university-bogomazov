@@ -43,17 +43,18 @@ public class Group extends Collective {
 	
 	public boolean addStudent(Student student) {
 		boolean isAdded = this.addInstance(student);
+		this.numberOfStudents = this.getNumberOfInstances();
 		return isAdded;
 	}
 	
 	public boolean removeStudent(Student student) {
 		boolean isRemoved = this.removeInstance(student);
+		this.numberOfStudents = this.getNumberOfInstances();
 		return isRemoved;
 	}
 	
 	public String getGroupInfo() {
 		String divider = "-----\n";
-		this.numberOfStudents = this.getNumberOfInstances();
 		String groupInfo = divider + "Group #" + number + ".\n" + divider;
 		if (teacher != null) {
 			groupInfo += teacher.getBriefPersonInfo() + "\n" + divider;

@@ -56,17 +56,18 @@ public class Department extends Collective {
 
 	public boolean addTeacher(Teacher teacher) {
 		boolean isAdded = this.addInstance(teacher);
+		this.numberOfTeachers = this.getNumberOfInstances();
 		return isAdded;
 	}
 	
 	public boolean removeTeacher(Teacher teacher) {
 		boolean isRemoved = this.removeInstance(teacher);
+		this.numberOfTeachers = this.getNumberOfInstances();
 		return isRemoved;
 	}
 	
 	public String getDepInfo() {
 		String divider = "-----\n";
-		this.numberOfTeachers = this.getNumberOfInstances();
 		String depInfo = divider + "Department of " + getDepName() + ".\n" + divider;
 		if (depHead != null) {
 			depInfo += "Department head: " + depHead.getBriefPersonInfo() + "\n" + divider;
