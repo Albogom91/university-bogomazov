@@ -1,29 +1,35 @@
 package com.belhard.university;
 
 public class Address {
-	private String country;
+	private Country country;
 	private String city;
 	private String street;
 	private String house;
 	private int flatNumber;
 	
-	public Address(String country, String city, String street, String house) {
+	public enum Country{
+		BY,
+		BELARUS,
+		BLR,
+	}
+	
+	public Address(Country country, String city, String street, String house) {
 		this.country = country;
 		this.city = city;
 		this.street = street;
 		this.house = house;
 	}
 	
-	public Address(String country, String city, String street, String house, int flatNumber) {
+	public Address(Country country, String city, String street, String house, int flatNumber) {
 		this(country, city, street, house);
 		this.flatNumber = flatNumber;
 	}
 	
-	public String getCountry() {
+	public Country getCountry() {
 		return country;
 	}
 	
-	public void setCountry(String country) {
+	public void setCountry(Country country) {
 		this.country = country;
 	}
 	

@@ -1,8 +1,69 @@
 package com.belhard.university;
 
+import java.math.BigDecimal;
+
+import com.belhard.university.Department.DepName;
+import com.belhard.university.Faculty.FacultyName;
+import com.belhard.university.Money.Currency;
+
 public class App {
 
 	public static void main(String[] args) {
+		
+		Cleaner cleaner1 = new Cleaner("Steven", "Rigley");
+		Teacher teacher1 = new Teacher("George", "Washington");
+		teacher1.setPhD(true);
+		Teacher teacher2 = new Teacher("William", "Henry", "Harrison");
+		Teacher teacher3 = new Teacher("Abe", "Lincoln");
+		Teacher teacher4 = new Teacher("Dwight", "Eisenhower");
+		teacher4.setPhD(true);
+		Teacher teacher5 = new Teacher("Richard", "Nixon");
+		Teacher teacher6 = new Teacher("Theodore", "Roosevelt");
+		
+		cleaner1.setSalary(new Money(Currency.USD, BigDecimal.valueOf(1000)));
+		teacher1.setSalary(new Money(Currency.USD, BigDecimal.valueOf(3000)));
+		teacher2.setSalary(new Money(Currency.USD, BigDecimal.valueOf(3000)));
+		teacher3.setSalary(new Money(Currency.USD, BigDecimal.valueOf(2000)));
+		teacher4.setSalary(new Money(Currency.USD, BigDecimal.valueOf(2000)));
+		teacher5.setSalary(new Money(Currency.USD, BigDecimal.valueOf(2000)));
+		teacher6.setSalary(new Money(Currency.USD, BigDecimal.valueOf(2000)));
+		
+		cleaner1.setYearsOfExperience(10);
+		
+		teacher1.setYearsOfExperience(10);
+		teacher2.setYearsOfExperience(10);
+		
+		System.out.println("Current salary of " + teacher1.toString() + " is:");
+		System.out.println(AccountantUtil.countTotalSalary(teacher1));
+		System.out.println();
+		System.out.println("Current salary of " + teacher2.toString() + " is:");
+		System.out.println(AccountantUtil.countTotalSalary(teacher2));
+		System.out.println();
+		
+		Collective.setCollectiveSize(10);
+		Department department1 = new Department(DepName.HISTORY_AND_LITERATURE);
+		department1.setDepHead(teacher1);
+		department1.setDepAssistHead(teacher2);
+		
+		department1.setCleaner(cleaner1);	
+		
+		department1.addTeacher(teacher3);
+		department1.addTeacher(teacher4);
+		department1.addTeacher(teacher5);
+		
+		System.out.println(department1.getDepInfo());
+		System.out.println("Current department of " + department1.getDepName() + " total salaries are: ");
+		System.out.println(AccountantUtil.countDepTotalSalaries(department1));
+		System.out.println();
+		
+		department1.removeTeacher(teacher4);
+		department1.addTeacher(teacher6);
+		department1.setDepAssistHead(null);
+		
+		System.out.println(department1.getDepInfo());
+		System.out.println("Current department of " + department1.getDepName() + " total salaries are: ");
+		System.out.println(AccountantUtil.countDepTotalSalaries(department1));
+		
 		Student student1 = new Student("James", "Riley");
 		Student student2 = new Student("Alexander", "Ivanovich", "Prohorov");
 		Student student3 = new Student("John", "Bell");
@@ -29,75 +90,57 @@ public class App {
 		student11.setAcademicRecord(9.4);
 		student12.setAcademicRecord(9.3);
 		
-		System.out.println(student1.getShortStudentInfo());
-		
-		Teacher teacher1 = new Teacher("Ollie", "Johnson");
-		Teacher teacher2 = new Teacher("Peter", "Stevenson");
-		
-		System.out.println(teacher1.getShortTeacherInfo());
-		
 		System.out.println();
 		
+		Collective.setCollectiveSize(8);
 		Group group1 = new Group(527);
-		group1.setTeacher(teacher1);
-		group1.setStudyYear(1);
-		
-		Group group2 = new Group(528);
-		group2.setStudyYear(1);
-		Group group3 = new Group(627);
-		group3.setStudyYear(2);
-		Group group4 = new Group(629);
-		group4.setStudyYear(2);
+		group1.setTeacher(teacher3);
 		
 		group1.addStudent(student1);
 		group1.addStudent(student2);
 		group1.addStudent(student3);
-		group2.addStudent(student5);
-		group2.addStudent(student6);
-		group2.addStudent(student7);
-		group3.addStudent(student8);
-		group3.addStudent(student9);
-		group3.addStudent(student10);
-		group4.addStudent(student11);
-		group4.addStudent(student12);
+		group1.addStudent(student4);
+		group1.addStudent(student5);
+		group1.addStudent(student6);
+		group1.addStudent(student7);
+		group1.addStudent(student8);
 		
 		System.out.println("Initial group:");		
 		System.out.println(group1.getGroupInfo());
-		System.out.print("Initial group GPA:");
+		System.out.print("Initial group GPA: ");
 		System.out.printf("%.2f", Util.getGradePointAverageGroup(group1));
 		System.out.println();
 		System.out.println();
 		
 		group1.removeStudent(student3);
+		group1.removeStudent(student7);
 		
 		System.out.println("Corrected group:");		
 		System.out.println(group1.getGroupInfo());
-		
-		group1.addStudent(student4);		
-		System.out.println("Newly corrected group:");
-		System.out.println(group1.getGroupInfo());
-		System.out.print("Newly corrected group GPA:");
+		System.out.print("Corrected group GPA: ");
 		System.out.printf("%.2f", Util.getGradePointAverageGroup(group1));
 		System.out.println();
 		System.out.println();
 		
-		group1.setTeacher(teacher2);		
-		System.out.println("Newly corrected (new teacher) group:");
+		group1.addStudent(student9);		
+		group1.addStudent(student10);		
+		System.out.println("Newly corrected group:");
 		System.out.println(group1.getGroupInfo());
-		
-		Faculty faculty1 = new Faculty("Naval engineering");
-		
-		faculty1.addGroup(group2);
-		faculty1.addGroup(group3);
-		faculty1.addGroup(group4);
-		
-		System.out.print("GPA of naval engineers:");
-		System.out.printf("%.2f", Util.getGradePointAverageFaculty(faculty1));
+		System.out.print("Newly corrected group GPA: ");
+		System.out.printf("%.2f", Util.getGradePointAverageGroup(group1));
+		System.out.println();
 		System.out.println();
 		
-		System.out.print("GPA of naval engineers(second year of study):");
-		System.out.printf("%.2f", Util.getGradePointAverageStudyYear(faculty1, 2));
-		System.out.println();
+		Collective.setCollectiveSize(10);
+		Department department2 = new Department(DepName.CHEMESTRY);
+		Department department3 = new Department(DepName.MATH_AND_PHYSICS);
+		Collective.setCollectiveSize(20);
+		Faculty faculty1 = new Faculty(FacultyName.FACULTY_OF_NATURAL_SCIENCES);
+		
+		faculty1.addDepartment(department2);
+		faculty1.addDepartment(department3);
+		
+		System.out.println(faculty1.getFacultyInfo());
 		
 	}
 

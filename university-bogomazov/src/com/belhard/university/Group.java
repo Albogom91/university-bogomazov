@@ -1,13 +1,13 @@
 package com.belhard.university;
 
-public class Group {
+public class Group extends Collective {
 	private int number;
-	private final Student[] students = new Student[8];
 	private Teacher teacher;
 	private int numberOfStudents;
 	private int studyYear;
 
 	public Group(int number) {
+		super();
 		this.number = number;
 	}
 
@@ -17,10 +17,6 @@ public class Group {
 
 	public void setNumber(int number) {
 		this.number = number;
-	}
-	
-	public Student[] getStudents() {
-		return students;
 	}
 
 	public Teacher getTeacher() {
@@ -44,55 +40,35 @@ public class Group {
 			this.studyYear = studyYear;
 		}
 	}
-
+	
 	public boolean addStudent(Student student) {
-		boolean isAdded = false;
-		if (numberOfStudents < students.length) {
-			students[numberOfStudents++] = student;
-			isAdded = true;
-		}
+		boolean isAdded = this.addInstance(student);
+		this.numberOfStudents = this.getNumberOfInstances();
 		return isAdded;
 	}
-
+	
 	public boolean removeStudent(Student student) {
-		boolean isRemoved = false;
-		for (int i = 0; i < numberOfStudents; i++) {
-			if (this.students[i].getId() == student.getId()) {
-				isRemoved = true;
-				if (i == numberOfStudents - 1) {
-					this.students[i] = null;
-				} else {
-					while (i < numberOfStudents - 1) {
-						this.students[i] = this.students[i + 1];
-						i++;
-					}
-					students[numberOfStudents - 1] = null;
-					break;
-				}
-			}
-		}
-		if (isRemoved) {
-			numberOfStudents--;
-		}
+		boolean isRemoved = this.removeInstance(student);
+		this.numberOfStudents = this.getNumberOfInstances();
 		return isRemoved;
 	}
-
+	
 	public String getGroupInfo() {
 		String divider = "-----\n";
 		String groupInfo = divider + "Group #" + number + ".\n" + divider;
 		if (teacher != null) {
-			groupInfo += teacher.getShortTeacherInfo() + "\n" + divider;
+			groupInfo += teacher.getBriefPersonInfo() + "\n" + divider;
 		} else {
 			groupInfo += "Teacher is currently unassigned.\n" + divider;
 		}
 		if (numberOfStudents < 1) {
 			groupInfo += "Currently there are no students in the group.\n" + divider;
 		} else {
-			for (int i = 0; i < numberOfStudents; i++) {
-				groupInfo += students[i].getShortStudentInfo() + "\n" + divider;
-			}
+			groupInfo += "Current students in the group are:\n" + divider;
+			groupInfo += this.getCollectiveInfo();
 		}
 		groupInfo += "Number of students: " + numberOfStudents + ".\n" + divider;
+		groupInfo += "Currently there are " + (this.getInstances().length - numberOfStudents) + " places left in the group.\n" + divider;
 		return groupInfo;
 	}
 }

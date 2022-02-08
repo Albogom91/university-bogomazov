@@ -1,20 +1,24 @@
 package com.belhard.university;
 
-public class Faculty {
-	private String name;
+public class Faculty extends Collective {
+	private FacultyName name;
 	private int numberOfDepartments;
-	private final Group[] groups = new Group[10];
 	private int numberOfGroups;
 	
-	public Faculty(String name) {
+	public enum FacultyName{
+		FACULTY_OF_HUMANITIES_AND_SOCIAL_SCINENCES,
+		FACULTY_OF_NATURAL_SCIENCES,
+	}
+	
+	public Faculty(FacultyName name) {
 		this.name = name;
 	}
 	
-	public String getName(){
+	public FacultyName getName(){
 		return name;
 	}
 	
-	public void setName(String name) {
+	public void setName(FacultyName name) {
 		this.name = name;
 	}
 	
@@ -22,43 +26,33 @@ public class Faculty {
 		return numberOfDepartments;
 	}
 	
-	public Group[] getGroups() {
-		return groups;
-	}
-	
 	public int getNumberOfGroups() {
 		return numberOfGroups;
 	}
 	
-	public boolean addGroup(Group group) {
-		boolean isAdded = false;
-		if (numberOfGroups < groups.length) {
-			groups[numberOfGroups++] = group;
-			isAdded = true;
-		}
+	public boolean addDepartment(Department department) {
+		boolean isAdded = this.addInstance(department);
+		this.numberOfDepartments = this.getNumberOfInstances();
 		return isAdded;
 	}
-
-	public boolean removeGroup(Group group) {
-		boolean isRemoved = false;
-		for (int i = 0; i < numberOfGroups; i++) {
-			if (this.groups[i].getNumber() == group.getNumber()) {
-				isRemoved = true;
-				if (i == numberOfGroups - 1) {
-					this.groups[i] = null;
-				} else {
-					while (i < numberOfGroups - 1) {
-						this.groups[i] = this.groups[i + 1];
-						i++;
-					}
-					groups[numberOfGroups - 1] = null;
-					break;
-				}
-			}
-		}
-		if (isRemoved) {
-			numberOfGroups--;
-		}
+	
+	public boolean removeDepartment(Department department) {
+		boolean isRemoved = this.removeInstance(department);
+		this.numberOfDepartments = this.getNumberOfInstances();
 		return isRemoved;
 	}
+	
+	public String getFacultyInfo() {
+		String divider = "-----\n";
+		String facultyInfo = divider + getName() + ".\n" + divider;
+		if (numberOfDepartments < 1) {
+			facultyInfo += "Currently there are no departments in the faculty.\n" + divider;
+		} else {
+			facultyInfo += "Current departments in the faculty are:\n" + divider;
+			facultyInfo += this.getCollectiveInfo();
+		}
+		facultyInfo += "Current number of departments is " + this.numberOfDepartments + ".\n" + divider;
+		return facultyInfo;
+	}
+	
 }
