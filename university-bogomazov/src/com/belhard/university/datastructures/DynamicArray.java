@@ -21,10 +21,12 @@ public class DynamicArray implements List {
 		return instances;
 	}
 	
+	@Override
 	public int size() {
 		return numberOfInstances;
 	}
 
+	@Override
 	public boolean add(Object obj) {
 		boolean isAdded = false;
 		if (numberOfInstances < instances.length) {
@@ -44,6 +46,7 @@ public class DynamicArray implements List {
 		return isAdded;
 	}
 
+	@Override
 	public boolean remove(Object obj) {
 		boolean isRemoved = false;
 		for (int i = 0; i < numberOfInstances; i++) {
@@ -67,6 +70,7 @@ public class DynamicArray implements List {
 		return isRemoved;
 	}
 	
+	@Override
 	public boolean contains(Object obj) {
 		boolean doesContain = false;
 		for(int i = 0; i < numberOfInstances; i++) {
@@ -78,10 +82,12 @@ public class DynamicArray implements List {
 		return doesContain;
 	}
 	
+	@Override
 	public Object get(int index) {
 		return instances[index];
 	}
 	
+	@Override
 	public Object[] toArray() {
 		Object[] temp = new Object[numberOfInstances];
 		for(int i = 0; i < temp.length; i++) {
@@ -90,6 +96,7 @@ public class DynamicArray implements List {
 		return temp;
 	}
 	
+	@Override
 	public String getInfo() {
 		String showInfo = new String();
 		for(int i = 0; i < numberOfInstances; i++) {

@@ -219,7 +219,6 @@ public class App {
 		groupList.removeNode(student5);
 		groupList.addNode(student7);
 		
-		
 		groupList.displayList();
 		
 		System.out.println(groupList.containsObjectInList(student1));
@@ -229,6 +228,7 @@ public class App {
 		
 		System.out.println("List to objects array:");
 		Util.showObjectArray(groupList.getListToArray());
+		
 	}
 
 }

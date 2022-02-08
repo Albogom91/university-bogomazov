@@ -133,7 +133,9 @@ public class Group implements Identifiable {
 			return false;
 		}
 		Group other = (Group) obj;
-		return id == other.id && number == other.number && numberOfStudents == other.numberOfStudents
+		return id == other.id 
+				&& number == other.number 
+				&& numberOfStudents == other.numberOfStudents
 				&& teacher.equals(other.teacher);
 	}
 
