@@ -2,10 +2,13 @@ package com.belhard.university;
 
 import java.math.BigDecimal;
 
+
 import com.belhard.university.Department.DepName;
 import com.belhard.university.Faculty.FacultyName;
 import com.belhard.university.Money.Currency;
 import com.belhard.university.Teacher.Discipline;
+
+import com.belhard.university.datastructures.LinkedList;
 
 public class App {
 
@@ -82,12 +85,10 @@ public class App {
 		
 		System.out.println("Student with index 3 in group1: " + group1.getStudent(3).toString());
 		
-		Student[] studentsGroup1 = group1.toArrayStudents();
-		
 		System.out.println();
 		
 		System.out.println("Students array in group1:");
-		Util.showObjectArray(studentsGroup1);
+		Util.showObjectArray(group1.toArrayStudents());
 		
 		System.out.println();
 		
@@ -199,6 +200,35 @@ public class App {
 		group2.addStudent(student12);
 		System.out.println(group2.getGroupInfo());
 		
+		System.out.println("***Linked list***");
+		System.out.println();
+		
+		LinkedList groupList = new LinkedList("Group2");
+		
+		student1.setFirstName("James");
+		groupList.addNode(student1);
+		groupList.addNode(student2);
+		groupList.addNode(student3);
+		groupList.addNode(student4);
+		groupList.addNode(student5);
+		groupList.addNode(student6);
+		
+		groupList.displayList();
+		
+		groupList.removeNode(student4);
+		groupList.removeNode(student5);
+		groupList.addNode(student7);
+		
+		
+		groupList.displayList();
+		
+		System.out.println(groupList.containsObjectInList(student1));
+		System.out.println(groupList.containsObjectInList(student4));
+		
+		System.out.println();
+		
+		System.out.println("List to objects array:");
+		Util.showObjectArray(groupList.getListToArray());
 	}
 
 }
