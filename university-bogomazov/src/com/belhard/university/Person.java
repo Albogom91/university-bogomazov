@@ -2,7 +2,7 @@ package com.belhard.university;
 
 import java.util.Date;
 
-public class Person {
+public abstract class Person implements Identifiable {
 	private static int counter = 0;
 	private int id;
 	private String firstName;
@@ -11,6 +11,8 @@ public class Person {
 	private Date dateOfBirth;
 	private int age;
 	private Address address;
+	
+	public abstract String introduceYourself();
 	
 	public Person(String firstName, String lastName) {
 		super();
@@ -24,6 +26,7 @@ public class Person {
 		this.patronymicName = patronymicName;
 	}
 	
+	@Override
 	public int getId() {
 		return id;
 	}
@@ -80,25 +83,12 @@ public class Person {
 	
 	@Override
 	public String toString() {
-		String name = new String();
-		if (patronymicName != null) {
-			name = firstName + " " + patronymicName + " " + lastName;
-		}
-		else {
-			name = firstName + " " + lastName;
-		}
-		return name;
-	}
-	
-	public String getBriefPersonInfo() {
-		String classType = this.getClass().getSimpleName();
-		String ShortInfo = classType + "(id#" + id + "); " + firstName + " ";
+		String ShortInfo = this.getClass().getSimpleName() + "(id#" + id + "); " + firstName + " ";
 		if (patronymicName != null) {
 			ShortInfo += patronymicName + " ";
 		}
-		ShortInfo +=lastName + ".";
+		ShortInfo += lastName;
 		return ShortInfo;
-		
 	}
 
 }

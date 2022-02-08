@@ -5,64 +5,11 @@ import java.math.BigDecimal;
 import com.belhard.university.Department.DepName;
 import com.belhard.university.Faculty.FacultyName;
 import com.belhard.university.Money.Currency;
+import com.belhard.university.Teacher.Discipline;
 
 public class App {
 
 	public static void main(String[] args) {
-		
-		Cleaner cleaner1 = new Cleaner("Steven", "Rigley");
-		Teacher teacher1 = new Teacher("George", "Washington");
-		teacher1.setPhD(true);
-		Teacher teacher2 = new Teacher("William", "Henry", "Harrison");
-		Teacher teacher3 = new Teacher("Abe", "Lincoln");
-		Teacher teacher4 = new Teacher("Dwight", "Eisenhower");
-		teacher4.setPhD(true);
-		Teacher teacher5 = new Teacher("Richard", "Nixon");
-		Teacher teacher6 = new Teacher("Theodore", "Roosevelt");
-		
-		cleaner1.setSalary(new Money(Currency.USD, BigDecimal.valueOf(1000)));
-		teacher1.setSalary(new Money(Currency.USD, BigDecimal.valueOf(3000)));
-		teacher2.setSalary(new Money(Currency.USD, BigDecimal.valueOf(3000)));
-		teacher3.setSalary(new Money(Currency.USD, BigDecimal.valueOf(2000)));
-		teacher4.setSalary(new Money(Currency.USD, BigDecimal.valueOf(2000)));
-		teacher5.setSalary(new Money(Currency.USD, BigDecimal.valueOf(2000)));
-		teacher6.setSalary(new Money(Currency.USD, BigDecimal.valueOf(2000)));
-		
-		cleaner1.setYearsOfExperience(10);
-		
-		teacher1.setYearsOfExperience(10);
-		teacher2.setYearsOfExperience(10);
-		
-		System.out.println("Current salary of " + teacher1.toString() + " is:");
-		System.out.println(AccountantUtil.countTotalSalary(teacher1));
-		System.out.println();
-		System.out.println("Current salary of " + teacher2.toString() + " is:");
-		System.out.println(AccountantUtil.countTotalSalary(teacher2));
-		System.out.println();
-		
-		Collective.setCollectiveSize(10);
-		Department department1 = new Department(DepName.HISTORY_AND_LITERATURE);
-		department1.setDepHead(teacher1);
-		department1.setDepAssistHead(teacher2);
-		
-		department1.setCleaner(cleaner1);	
-		
-		department1.addTeacher(teacher3);
-		department1.addTeacher(teacher4);
-		department1.addTeacher(teacher5);
-		
-		System.out.println(department1.getDepInfo());
-		System.out.println("Current department of " + department1.getDepName() + " total salaries are: ");
-		System.out.println(AccountantUtil.countDepTotalSalaries(department1));
-		System.out.println();
-		
-		department1.removeTeacher(teacher4);
-		department1.addTeacher(teacher6);
-		department1.setDepAssistHead(null);
-		
-		System.out.println(department1.getDepInfo());
-		System.out.println("Current department of " + department1.getDepName() + " total salaries are: ");
-		System.out.println(AccountantUtil.countDepTotalSalaries(department1));
 		
 		Student student1 = new Student("James", "Riley");
 		Student student2 = new Student("Alexander", "Ivanovich", "Prohorov");
@@ -90,12 +37,12 @@ public class App {
 		student11.setAcademicRecord(9.4);
 		student12.setAcademicRecord(9.3);
 		
-		System.out.println();
+		Teacher teacher3 = new Teacher("Abe", "Lincoln");
 		
-		Collective.setCollectiveSize(8);
 		Group group1 = new Group(527);
 		group1.setTeacher(teacher3);
 		
+		System.out.println(group1.getGroupInfo());
 		group1.addStudent(student1);
 		group1.addStudent(student2);
 		group1.addStudent(student3);
@@ -108,39 +55,143 @@ public class App {
 		System.out.println("Initial group:");		
 		System.out.println(group1.getGroupInfo());
 		System.out.print("Initial group GPA: ");
-		System.out.printf("%.2f", Util.getGradePointAverageGroup(group1));
-		System.out.println();
-		System.out.println();
+		System.out.printf("%.2f\n\n", Util.getGradePointAverageGroup(group1));
 		
 		group1.removeStudent(student3);
 		group1.removeStudent(student7);
 		
 		System.out.println("Corrected group:");		
 		System.out.println(group1.getGroupInfo());
-		System.out.print("Corrected group GPA: ");
-		System.out.printf("%.2f", Util.getGradePointAverageGroup(group1));
-		System.out.println();
-		System.out.println();
+		System.out.println("Number of elements in group1 dynamic array: " + group1.size());
+		System.out.print("Corrected group: GPA: ");
+		System.out.printf("%.2f\n\n", Util.getGradePointAverageGroup(group1));
 		
 		group1.addStudent(student9);		
-		group1.addStudent(student10);		
-		System.out.println("Newly corrected group:");
+		group1.addStudent(student10);
+		
+		System.out.println("Newly corrected group:");		
 		System.out.println(group1.getGroupInfo());
+		System.out.println("Number of elements in group1 dynamic array: " + group1.size());
 		System.out.print("Newly corrected group GPA: ");
-		System.out.printf("%.2f", Util.getGradePointAverageGroup(group1));
-		System.out.println();
+		System.out.printf("%.2f\n\n", Util.getGradePointAverageGroup(group1));
+		
+		student1.setStudyYear(2);
+		System.out.println(student1.introduceYourself());
+		
+		System.out.println("Group1 contains student4: " + group1.containsStudent(student4));
+		
+		System.out.println("Student with index 3 in group1: " + group1.getStudent(3).toString());
+		
+		Student[] studentsGroup1 = group1.toArrayStudents();
+		
 		System.out.println();
 		
-		Collective.setCollectiveSize(10);
+		System.out.println("Students array in group1:");
+		Util.showObjectArray(studentsGroup1);
+		
+		System.out.println();
+		
+		Cleaner cleaner1 = new Cleaner("Steven", "Rigley");
+		Teacher teacher1 = new Teacher("George", "Washington");
+		teacher1.setPhD(true);
+		Teacher teacher2 = new Teacher("William", "Henry", "Harrison");
+		Teacher teacher4 = new Teacher("Dwight", "Eisenhower");
+		teacher4.setPhD(true);
+		Teacher teacher5 = new Teacher("Richard", "Nixon");
+		Teacher teacher6 = new Teacher("Theodore", "Roosevelt");
+		
+		teacher1.setDiscipline(Discipline.HISTORY);
+		System.out.println(teacher1.introduceYourself());
+		cleaner1.setFloorToClean(3);
+		System.out.println(cleaner1.introduceYourself());
+		
+		cleaner1.setSalary(new Money(Currency.USD, BigDecimal.valueOf(1000)));
+		teacher1.setSalary(new Money(Currency.USD, BigDecimal.valueOf(3000)));
+		teacher2.setSalary(new Money(Currency.USD, BigDecimal.valueOf(3000)));
+		teacher3.setSalary(new Money(Currency.USD, BigDecimal.valueOf(2000)));
+		teacher4.setSalary(new Money(Currency.USD, BigDecimal.valueOf(2000)));
+		teacher5.setSalary(new Money(Currency.USD, BigDecimal.valueOf(2000)));
+		teacher6.setSalary(new Money(Currency.USD, BigDecimal.valueOf(2000)));
+		
+		cleaner1.setYearsOfExperience(10);
+		
+		teacher1.setYearsOfExperience(10);
+		teacher2.setYearsOfExperience(10);
+		
+		System.out.println("Current salary of " + teacher1.toString() + " is:");
+		System.out.println(AccountantUtil.countTotalSalary(teacher1));
+		System.out.println();
+		System.out.println("Current salary of " + teacher2.toString() + " is:");
+		System.out.println(AccountantUtil.countTotalSalary(teacher2));
+		System.out.println();
+		
+		Department department1 = new Department(DepName.HISTORY_AND_LITERATURE);
+		department1.setDepHead(teacher1);
+		department1.setDepAssistHead(teacher2);
+		
+		department1.setCleaner(cleaner1);	
+		
+		department1.addTeacher(teacher3);
+		department1.addTeacher(teacher4);
+		department1.addTeacher(teacher5);
+		
+		System.out.println(department1.getDepInfo());
+		System.out.println("Current department of " + department1.getName() + " total salaries are: ");
+		System.out.println(AccountantUtil.countDepTotalSalaries(department1));
+		System.out.println();
+		
+		department1.removeTeacher(teacher4);
+		department1.addTeacher(teacher6);
+		department1.setDepAssistHead(null);
+		
+		System.out.println(department1.getDepInfo());
+		System.out.println("Current department of " + department1.getName() + " total salaries are: ");
+		System.out.println(AccountantUtil.countDepTotalSalaries(department1));
+		
 		Department department2 = new Department(DepName.CHEMESTRY);
 		Department department3 = new Department(DepName.MATH_AND_PHYSICS);
-		Collective.setCollectiveSize(20);
-		Faculty faculty1 = new Faculty(FacultyName.FACULTY_OF_NATURAL_SCIENCES);
 		
+		Faculty faculty1 = new Faculty(FacultyName.NATURAL_SCIENCES);
+		
+		faculty1.setFacultyHead(teacher4);
 		faculty1.addDepartment(department2);
 		faculty1.addDepartment(department3);
 		
 		System.out.println(faculty1.getFacultyInfo());
+		
+		System.out.println("Hash codes:");
+		System.out.println("Student:" + student1.hashCode());
+		System.out.println("Teacher:" + teacher1.hashCode());
+		System.out.println("Cleaner:" + cleaner1.hashCode());
+		System.out.println("Group:" + group1.hashCode());
+		System.out.println("Department:" + department1.hashCode());
+		System.out.println("Faculty:" + faculty1.hashCode());
+		
+		System.out.println();
+		
+		System.out.println("Department1 equals department2: " + department1.equals(department2));
+		System.out.println("Department1 equals department1: " + department1.equals(department1));
+		System.out.println("Department1 equals null: " + department1.equals(null));
+		
+		System.out.println();
+		System.out.println("Id's:");
+		System.out.println(group1.getId());
+		System.out.println(department2.getId());
+		System.out.println(faculty1.getId());
+		System.out.println(student10.getId());
+		System.out.println(teacher1.getId());
+		System.out.println(cleaner1.getId());
+		
+		System.out.println();
+		System.out.println("Student1 equals Student1: " + student1.equals(student1));
+		student1.setFirstName(null);
+		System.out.println("Student1 equals Student1(after firstName set to null in student1): " + student1.equals(student1));
+		System.out.println("Department1 contains teacher2: " + department1.containsTeacher(teacher2));
+		System.out.println("Department1 contains teacher3: " + department1.containsTeacher(teacher3));
+		System.out.println("Group1 contains student12: " + group1.containsStudent(student12));
+		System.out.println("Group1 contains student8: " + group1.containsStudent(student8));
+		System.out.println("Faculty1 contains department1: " + faculty1.containsDepartment(department1));
+		System.out.println("Faculty1 contains department3: " + faculty1.containsDepartment(department3));
 		
 	}
 

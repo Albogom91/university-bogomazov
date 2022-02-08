@@ -1,6 +1,6 @@
 package com.belhard.university;
 
-public class Employee extends Person {
+public abstract class Employee extends Person implements Identifiable {
 	private Money salary;
 	private int yearsOfExperience;
 	
@@ -12,8 +12,9 @@ public class Employee extends Person {
 		super(firstName, patronymicName, lastName);
 	}
 	
-	public Employee(Person person) {
-		super(person.getFirstName(), person.getLastName());
+	@Override
+	public int getId() {
+		return super.getId();
 	}
 	
 	public Money getSalary() {
