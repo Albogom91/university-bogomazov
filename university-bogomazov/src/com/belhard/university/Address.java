@@ -14,6 +14,7 @@ public class Address {
 	}
 	
 	public Address(Country country, String city, String street, String house) {
+		super();
 		this.country = country;
 		this.city = city;
 		this.street = street;

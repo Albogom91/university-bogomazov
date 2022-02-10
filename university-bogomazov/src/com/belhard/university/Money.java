@@ -14,6 +14,7 @@ public class Money {
 	}
 	
 	public Money(Currency currency, BigDecimal amount) {
+		super();
 		this.currency = currency;
 		setAmount(amount);
 	}
