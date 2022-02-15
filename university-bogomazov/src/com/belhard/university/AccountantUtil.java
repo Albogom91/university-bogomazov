@@ -51,9 +51,9 @@ public class AccountantUtil {
 		if (assistantHead != null) {
 		totalSalaries = totalSalaries.add(countTotalSalary(assistantHead));
 		}
-		for(int i = 0; i < d.getTeachers().getNumberOfInstances(); i++) {
-			Teacher t = (Teacher) d.getTeachers().getInstances()[i];
-			totalSalaries = totalSalaries.add(countTotalSalary(t));
+		Teacher[] temp = d.toArrayTeachers();
+		for(int i = 0; i < d.getTeachers().size(); i++) {
+			totalSalaries = totalSalaries.add(countTotalSalary(temp[i]));
 		}
 		return totalSalaries;		
 	}

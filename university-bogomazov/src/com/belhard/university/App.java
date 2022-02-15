@@ -8,7 +8,7 @@ import com.belhard.university.Faculty.FacultyName;
 import com.belhard.university.Money.Currency;
 import com.belhard.university.Teacher.Discipline;
 
-import com.belhard.university.datastructures.LinkedList;
+import com.belhard.university.datastructures.*;
 
 public class App {
 
@@ -203,7 +203,7 @@ public class App {
 		System.out.println("***Linked list***");
 		System.out.println();
 		
-		LinkedList groupList = new LinkedList("Group2");
+		LinkList<Student> groupList = new LinkedList<Student>("Group2");
 		
 		student1.setFirstName("James");
 		groupList.addNode(student1);

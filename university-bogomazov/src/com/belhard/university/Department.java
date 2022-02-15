@@ -2,7 +2,7 @@ package com.belhard.university;
 
 import java.util.Objects;
 
-import com.belhard.university.datastructures.DynamicArray;
+import com.belhard.university.datastructures.*;
 
 public class Department implements Identifiable {
 	private static int counter = 0;
@@ -12,7 +12,7 @@ public class Department implements Identifiable {
 	private Teacher depAssistHead;
 	private Cleaner cleaner;
 	private int numberOfTeachers;
-	private DynamicArray teachers = new DynamicArray();
+	private List<Teacher> teachers = new DynamicArray<Teacher>();
 	private final static int maxNumberOfTeachers = 10;
 	
 	public enum DepName{
@@ -68,7 +68,7 @@ public class Department implements Identifiable {
 		return numberOfTeachers;
 	}
 	
-	public DynamicArray getTeachers(){
+	public List<Teacher> getTeachers(){
 		return teachers;
 	}
 	
@@ -77,7 +77,7 @@ public class Department implements Identifiable {
 	}
 	
 	public int size() {
-		return teachers.getNumberOfInstances();
+		return teachers.size();
 	}
 
 	public boolean addTeacher(Teacher teacher) {
@@ -87,7 +87,7 @@ public class Department implements Identifiable {
 		} else {
 		if (numberOfTeachers < maxNumberOfTeachers) {
 			isAdded = teachers.add(teacher);
-			numberOfTeachers = teachers.getNumberOfInstances();
+			numberOfTeachers = teachers.size();
 			}
 		}
 		return isAdded;
@@ -95,7 +95,7 @@ public class Department implements Identifiable {
 	
 	public boolean removeTeacher(Teacher teacher) {
 		boolean isRemoved = teachers.remove(teacher);
-		numberOfTeachers = teachers.getNumberOfInstances();
+		numberOfTeachers = teachers.size();
 		return isRemoved;
 	}
 	
@@ -133,6 +133,7 @@ public class Department implements Identifiable {
 	public String getDepInfo() {
 		String divider = "-----\n";
 		String depInfo = divider + toString() + ".\n" + divider;
+		DynamicArray<Teacher> tempTeachers = (DynamicArray<Teacher>) teachers;
 		if (depHead != null) {
 			depInfo += "Department head: " + depHead.toString() + "\n" + divider;
 		} else {
@@ -147,7 +148,7 @@ public class Department implements Identifiable {
 			depInfo += "Currently there are no teachers in the department.\n" + divider;
 		} else {
 			depInfo += "Current teachers in the department are:\n" + divider;
-			depInfo += teachers.getInfo() + divider;
+			depInfo += tempTeachers.getInfo() + divider;
 		}
 		depInfo += "Number of teachers: " + numberOfTeachers + ".\n" + divider;
 		depInfo += "Currently " + (maxNumberOfTeachers - numberOfTeachers) + " teachers needed to complete department.\n" + divider;

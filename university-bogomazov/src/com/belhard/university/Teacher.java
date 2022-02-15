@@ -28,11 +28,6 @@ public class Teacher extends Employee implements Identifiable{
 	public Teacher(String firstName, String patronymicName, String lastName) {
 		super(firstName, patronymicName, lastName);
 	}
-	
-	@Override
-	public int getId() {
-		return super.getId();
-	}
 		
 	public Discipline getDiscipline() {
 		return discipline;

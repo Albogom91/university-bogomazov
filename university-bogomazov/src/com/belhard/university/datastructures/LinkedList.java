@@ -1,6 +1,6 @@
 package com.belhard.university.datastructures;
 
-public class LinkedList {
+public class LinkedList<E> implements LinkList<E> {
 	
 	private String name;
 	
@@ -30,7 +30,7 @@ public class LinkedList {
 	private Node head = null;
 	private Node tail = null;
 
-	public void addNode(Object obj) {
+	public void addNode(E obj) {
 		Node newNode = new Node(obj);
 		if (head == null) {
 			head = newNode;
@@ -42,7 +42,7 @@ public class LinkedList {
 		}
 	}
 	
-	public void removeNode(Object obj) {
+	public void removeNode(E obj) {
 		int index = getIndexInList(obj);
 		if(index < 0) {
 			return;
@@ -68,7 +68,7 @@ public class LinkedList {
 		}
 	}
 	
-	public int getIndexInList(Object obj) {
+	public int getIndexInList(E obj) {
 		int index = 0;
 		Node current = head;
 		boolean doesContain = false;
@@ -97,7 +97,7 @@ public class LinkedList {
 		return length;
 	}
 	
-	public boolean containsObjectInList(Object obj) {
+	public boolean containsObjectInList(E obj) {
 		Node current = head;
 		boolean doesContain = false;
 		while(current != null) {

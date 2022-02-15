@@ -14,11 +14,6 @@ public class Student extends Person implements Identifiable{
 		super(firstName, patronymicName, lastName);
 	}
 	
-	@Override
-	public int getId() {
-		return super.getId();
-	}
-	
 	public int getStudyYear() {
 		return studyYear;
 	}

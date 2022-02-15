@@ -13,11 +13,6 @@ public class Cleaner extends Employee implements Identifiable {
 		super(firstName, patronymicName, lastName);
 	}
 	
-	@Override
-	public int getId() {
-		return super.getId();
-	}
-	
 	public int getFloorToClean() {
 		return floorToClean;
 	}

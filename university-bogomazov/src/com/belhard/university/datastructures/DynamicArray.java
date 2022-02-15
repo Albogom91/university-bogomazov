@@ -1,6 +1,6 @@
 package com.belhard.university.datastructures;
 
-public class DynamicArray implements List {
+public class DynamicArray<E> implements List<E> {
 	private int numberOfInstances;
 	private static final int size = 5;
 	private Object[] instances = new Object[size];
@@ -27,7 +27,7 @@ public class DynamicArray implements List {
 	}
 
 	@Override
-	public boolean add(Object obj) {
+	public boolean add(E obj) {
 		boolean isAdded = false;
 		if (numberOfInstances < instances.length) {
 			instances[numberOfInstances++] = obj;
@@ -47,7 +47,7 @@ public class DynamicArray implements List {
 	}
 
 	@Override
-	public boolean remove(Object obj) {
+	public boolean remove(E obj) {
 		boolean isRemoved = false;
 		for (int i = 0; i < numberOfInstances; i++) {
 			if (this.instances[i].equals(obj)) {
@@ -71,7 +71,7 @@ public class DynamicArray implements List {
 	}
 	
 	@Override
-	public boolean contains(Object obj) {
+	public boolean contains(E obj) {
 		boolean doesContain = false;
 		for(int i = 0; i < numberOfInstances; i++) {
 			if(instances[i].equals(obj)) {
@@ -83,8 +83,8 @@ public class DynamicArray implements List {
 	}
 	
 	@Override
-	public Object get(int index) {
-		return instances[index];
+	public E get(int index) {
+		return (E) instances[index];
 	}
 	
 	@Override
@@ -96,7 +96,6 @@ public class DynamicArray implements List {
 		return temp;
 	}
 	
-	@Override
 	public String getInfo() {
 		String showInfo = new String();
 		for(int i = 0; i < numberOfInstances; i++) {

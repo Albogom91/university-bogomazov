@@ -1,11 +1,10 @@
 package com.belhard.university.datastructures;
 
-public interface List {
+public interface List<E> {
 	int size();
-	boolean add(Object obj);
-	boolean remove(Object obj);
-	boolean contains(Object obj);
-	Object get(int index);
+	boolean add(E obj);
+	boolean remove(E obj);
+	boolean contains(E obj);
+	E get(int index);
 	Object[] toArray();
-	String getInfo();
 }

@@ -2,7 +2,7 @@ package com.belhard.university;
 
 import java.util.Objects;
 
-import com.belhard.university.datastructures.DynamicArray;
+import com.belhard.university.datastructures.*;
 
 public class Faculty implements Identifiable{
 	private static int counter = 0;
@@ -10,7 +10,7 @@ public class Faculty implements Identifiable{
 	private FacultyName name;
 	private int numberOfDepartments;
 	private Teacher facultyHead;
-	private DynamicArray departments = new DynamicArray();
+	private List<Department> departments = new DynamicArray<Department>();
 	private final static int maxNumberOfDepartments = 20;
 	
 	public enum FacultyName{
@@ -49,7 +49,7 @@ public class Faculty implements Identifiable{
 		this.facultyHead = teacher;
 	}
 	
-	public DynamicArray getDepartments(){
+	public List<Department> getDepartments(){
 		return departments;
 	}
 	
@@ -58,7 +58,7 @@ public class Faculty implements Identifiable{
 	}
 	
 	public int size() {
-		return departments.getNumberOfInstances();
+		return departments.size();
 	}
 	
 	public boolean addDepartment(Department department) {
@@ -68,16 +68,16 @@ public class Faculty implements Identifiable{
 		} else {
 		if (numberOfDepartments < maxNumberOfDepartments) {
 			isAdded = departments.add(department);;
-			numberOfDepartments = departments.getNumberOfInstances();
+			numberOfDepartments = departments.size();
 			}
 		}
-		numberOfDepartments = departments.getNumberOfInstances();
+		numberOfDepartments = departments.size();
 		return isAdded;
 	}
 	
 	public boolean removeDepartment(Department department) {
 		boolean isRemoved = departments.remove(department);
-		numberOfDepartments = departments.getNumberOfInstances();
+		numberOfDepartments = departments.size();
 		return isRemoved;
 	}
 	
@@ -107,6 +107,7 @@ public class Faculty implements Identifiable{
 	public String getFacultyInfo() {
 		String divider = "-----\n";
 		String facultyInfo = divider + toString() + ".\n" + divider;
+		DynamicArray<Department> tempDepartments = (DynamicArray<Department>) departments;
 		if (facultyHead != null) {
 			facultyInfo += "Faculty head: " + facultyHead.toString() + "\n" + divider;
 		} else {
@@ -116,7 +117,7 @@ public class Faculty implements Identifiable{
 			facultyInfo += "Currently there are no departments in the faculty.\n" + divider;
 		} else {
 			facultyInfo += "Current departments in the faculty are:\n" + divider;
-			facultyInfo += departments.getInfo() + divider;
+			facultyInfo += tempDepartments.getInfo() + divider;
 		}
 		facultyInfo += "Current number of departments is " + numberOfDepartments + ".\n" + divider;
 		return facultyInfo;

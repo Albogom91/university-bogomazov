@@ -1,6 +1,6 @@
 package com.belhard.university;
 
-import com.belhard.university.datastructures.DynamicArray;
+import com.belhard.university.datastructures.*;
 
 public class Group implements Identifiable {
 	private static int counter = 0;
@@ -8,7 +8,7 @@ public class Group implements Identifiable {
 	private int number;
 	private Teacher teacher;
 	private int numberOfStudents;
-	private DynamicArray students = new DynamicArray();
+	private List<Student> students = new DynamicArray<Student>();
 	private final static int maxNumberOfStudents = 8;
 
 	public Group(int number) {
@@ -46,12 +46,12 @@ public class Group implements Identifiable {
 		return maxNumberOfStudents;
 	}
 
-	public DynamicArray getStudents() {
+	public List<Student> getStudents() {
 		return students;
 	}
 
 	public int size() {
-		return students.getNumberOfInstances();
+		return students.size();
 	}
 
 	public boolean addStudent(Student student) {
@@ -61,7 +61,7 @@ public class Group implements Identifiable {
 		} else {
 			if (numberOfStudents < maxNumberOfStudents) {
 				isAdded = students.add(student);
-				numberOfStudents = students.getNumberOfInstances();
+				numberOfStudents = students.size();
 			}
 		}
 		return isAdded;
@@ -69,7 +69,7 @@ public class Group implements Identifiable {
 
 	public boolean removeStudent(Student student) {
 		boolean isRemoved = students.remove(student);
-		numberOfStudents = students.getNumberOfInstances();
+		numberOfStudents = students.size();
 		return isRemoved;
 	}
 
@@ -99,6 +99,7 @@ public class Group implements Identifiable {
 	public String getGroupInfo() {
 		String divider = "-----\n";
 		String groupInfo = divider + toString() + ".\n" + divider;
+		DynamicArray<Student> tempStudents = (DynamicArray<Student>) students;
 		if (teacher != null) {
 			groupInfo += teacher.toString() + "\n" + divider;
 		} else {
@@ -108,7 +109,7 @@ public class Group implements Identifiable {
 			groupInfo += "Currently there are no students in the group.\n" + divider;
 		} else {
 			groupInfo += "Current students in the group are:\n" + divider;
-			groupInfo += students.getInfo() + divider;
+			groupInfo += tempStudents.getInfo() + divider;
 		}
 		groupInfo += "Number of students: " + numberOfStudents + ".\n" + divider;
 		groupInfo += "Currently there are " + (maxNumberOfStudents - numberOfStudents) + " places left in the group.\n" + divider;
