@@ -2,6 +2,8 @@ package com.belhard.university;
 
 import java.util.Objects;
 
+import com.belhard.university.exceptions.*;
+
 public class Cleaner extends Employee implements Identifiable {
 	private int floorToClean;
 	
@@ -18,9 +20,15 @@ public class Cleaner extends Employee implements Identifiable {
 	}
 	
 	public void setFloorToClean(int floorToClean) {
-		if (floorToClean > 0 && floorToClean < 180) {
-			this.floorToClean = floorToClean;
+		try {
+			if (floorToClean < -1 || floorToClean > 180) {
+				throw new IllegalFloorToClean("Invalid floor(does not exist)!");
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+			return;
 		}
+		this.floorToClean = floorToClean;
 	}
 	
 	@Override

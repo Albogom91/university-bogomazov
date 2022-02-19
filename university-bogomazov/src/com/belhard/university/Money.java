@@ -2,6 +2,8 @@ package com.belhard.university;
 
 import java.math.BigDecimal;
 
+import com.belhard.university.exceptions.*;
+
 public class Money {
 	private Currency currency;
 	private BigDecimal amount;
@@ -32,9 +34,22 @@ public class Money {
 	}
 	
 	public void setAmount(BigDecimal amount) {
-		if (amount.compareTo(BigDecimal.ZERO) > 0) {
-			this.amount = amount;
+		try {
+			if (amount.compareTo(BigDecimal.ZERO) < 0) {
+				throw new IllegalSalary("Invalid salary(can't be negative!");
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+			return;
 		}
+		this.amount = amount;
+	}
+	
+	@Override
+	public String toString() {
+		String name = new String();
+		name = String.valueOf(amount) + " " + currency;
+		return name;
 	}
 }
 

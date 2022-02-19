@@ -1,6 +1,7 @@
 package com.belhard.university;
 
 import java.util.Date;
+import com.belhard.university.exceptions.*;
 
 public abstract class Person implements Identifiable {
 	private static int counter = 0;
@@ -68,9 +69,15 @@ public abstract class Person implements Identifiable {
 	}
 	
 	public void setAge(int age) {
-		if (age > 7 && age < 130) {
-			this.age = age;
+		try {
+			if (age < 7 || age > 130) {
+				throw new IllegalAgeException("Invalid age!");
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+			return;
 		}
+		this.age = age;
 	}
 	
 	public Address getAddress() {

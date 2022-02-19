@@ -1,6 +1,7 @@
 package com.belhard.university;
 
 import com.belhard.university.datastructures.*;
+import com.belhard.university.exceptions.*;
 
 public class Group implements Identifiable {
 	private static int counter = 0;
@@ -27,6 +28,14 @@ public class Group implements Identifiable {
 	}
 
 	public void setNumber(int number) {
+		try {
+			if (number <= 0) {
+				throw new IllegalGroupNumber("Invalid group number(can't be negative or 0)!");
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+			return;
+		}
 		this.number = number;
 	}
 

@@ -1,5 +1,7 @@
 package com.belhard.university;
 
+import com.belhard.university.exceptions.*;
+
 public abstract class Employee extends Person implements Identifiable {
 	private Money salary;
 	private int yearsOfExperience;
@@ -25,9 +27,15 @@ public abstract class Employee extends Person implements Identifiable {
 	}
 	
 	public void setYearsOfExperience(int yearsOfExperience) {
-		if (yearsOfExperience > 0) {
-			this.yearsOfExperience = yearsOfExperience;
+		try {
+			if (yearsOfExperience < 0) {
+				throw new IllegalExperienceAmount("Invalid years of experience (can't be negative)!");
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+			return;
 		}
+		this.yearsOfExperience = yearsOfExperience;
 	}
 	
 	@Override

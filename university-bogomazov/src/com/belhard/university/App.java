@@ -229,6 +229,30 @@ public class App {
 		System.out.println("List to objects array:");
 		Util.showObjectArray(groupList.getListToArray());
 		
+		System.out.println();
+		System.out.println("***Exceptions***");
+		System.out.println();
+		
+		student1.setAge(6);
+		System.out.println(student1.getAge());
+		
+		cleaner1.setSalary(new Money(Currency.USD, BigDecimal.valueOf(-1000)));
+		System.out.println(cleaner1.getSalary().getAmount());
+		
+		teacher3.setYearsOfExperience(-1);
+		System.out.println(teacher3.getYearsOfExperience());
+		
+		cleaner1.setFloorToClean(-2);
+		System.out.println(cleaner1.getFloorToClean());
+		
+		student1.setStudyYear(-1);
+		System.out.println(student1.getStudyYear());
+		
+		student1.setAcademicRecord(11.1);
+		System.out.println(student1.getAcademicRecord());
+		
+		group1.setNumber(-1);
+		System.out.println(group1.getNumber());
 	}
 
 }
