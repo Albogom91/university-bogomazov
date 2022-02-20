@@ -1,6 +1,6 @@
 package com.belhard.university.exceptions;
 
-public class IllegalExperienceAmount extends RuntimeException{
+public class IllegalExperienceAmount extends Exception{
 
 		/**
 	 * 

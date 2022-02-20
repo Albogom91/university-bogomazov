@@ -1,6 +1,6 @@
 package com.belhard.university.exceptions;
 
-public class IllegalAgeException extends RuntimeException {
+public class IllegalAgeException extends Exception {
 	
 	/**
 	 * 

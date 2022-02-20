@@ -1,6 +1,6 @@
 package com.belhard.university.exceptions;
 
-public class IllegalGroupNumber extends RuntimeException {
+public class IllegalGroupNumber extends Exception {
 
 	/**
 	 * 

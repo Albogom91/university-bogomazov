@@ -1,6 +1,6 @@
 package com.belhard.university.exceptions;
 
-public class IllegalAcademicRecord extends RuntimeException {
+public class IllegalAcademicRecord extends Exception {
 
 	/**
 	 * 

@@ -1,6 +1,6 @@
 package com.belhard.university.exceptions;
 
-public class IllegalFloorToClean extends RuntimeException {
+public class IllegalFloorToClean extends Exception {
 
 	/**
 	 * 

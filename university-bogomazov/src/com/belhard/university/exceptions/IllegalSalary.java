@@ -1,6 +1,6 @@
 package com.belhard.university.exceptions;
 
-public class IllegalSalary extends RuntimeException {
+public class IllegalSalary extends Exception {
 	
 	/**
 	 * 
