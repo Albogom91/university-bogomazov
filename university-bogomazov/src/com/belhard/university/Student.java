@@ -2,6 +2,8 @@ package com.belhard.university;
 
 import java.util.Objects;
 
+import com.belhard.university.exceptions.*;
+
 public class Student extends Person implements Identifiable{
 	private int studyYear;
 	private double academicRecord;
@@ -19,9 +21,15 @@ public class Student extends Person implements Identifiable{
 	}
 	
 	public void setStudyYear(int studyYear) {
-		if (studyYear > 0 && studyYear < 7) {
-			this.studyYear = studyYear;
+		try {
+			if (studyYear < 0 || studyYear > 7) {
+				throw new IllegalStudyYear("Invalid study year(can't be negative or too large)!");
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+			return;
 		}
+		this.studyYear = studyYear;
 	}
 	
 	public double getAcademicRecord() {
@@ -29,9 +37,15 @@ public class Student extends Person implements Identifiable{
 	}
 	
 	public void setAcademicRecord(double academicRecord) {
-		if (academicRecord > 0 && academicRecord <= 10) {
-			this.academicRecord = academicRecord;
+		try {
+			if (academicRecord < 0 || academicRecord >= 10) {
+				throw new IllegalAcademicRecord("Invalid academic record(can't be negative or more than 10)!");
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+			return;
 		}
+			this.academicRecord = academicRecord;
 	}
 	
 	@Override
